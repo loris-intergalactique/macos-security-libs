@@ -20,7 +20,7 @@ jobs:
 
       - name: Tarball retrieval
         run: |
-          bash tools/tarball-download.sh | tar xzvf - -C "$(pwd)" --strip-components 1
+          bash lolo-tools/download.sh | tar xzvf - -C "$(pwd)" --strip-components 1
           
       - name: Git Configuration
         run: |
