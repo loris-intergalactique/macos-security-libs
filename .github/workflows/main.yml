@@ -1,0 +1,37 @@
+name: Source retrieval
+
+on:
+  schedule:
+    # At 00:00:00am, on the 1st and 16th day, every month
+    - cron: '* * 1,17 * *'
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/main.yml'
+      
+jobs:
+  build:
+    name: Main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Main repository Checkout
+        uses: actions/checkout@v1
+
+      - name: Tarball retrieval
+        run: |
+          bash tools/tarball-download.sh | tar xzvf - -C "$(pwd)" --strip-components 1
+          
+      - name: Git Configuration
+        run: |
+          git config --local user.name "bot-intergalactique"
+      - name: Git Merge
+        continue-on-error: true
+        run: |
+          git add .
+          git commit -m "build: Source update"
+      - name: GitHub Push
+        continue-on-error: true
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
