@@ -15,6 +15,7 @@ jobs:
     name: Main
     runs-on: ubuntu-latest
     steps:
+      # The main checkout may fail - Investigation is in progress.
       - name: Main repository Checkout
         uses: actions/checkout@v1
 
