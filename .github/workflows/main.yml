@@ -2,8 +2,8 @@ name: Source retrieval
 
 on:
   schedule:
-    # At 00:00:00am, on the 1st and 16th day, every month
-    - cron: '* * 1,17 * *'
+    # At 00:00:00am, on the 1st and 17th day, every month
+    - cron: '0 0 1,17 * *'
   push:
     branches:
       - master
@@ -15,7 +15,6 @@ jobs:
     name: Main
     runs-on: ubuntu-latest
     steps:
-      # The main checkout may fail - Investigation is in progress.
       - name: Main repository Checkout
         uses: actions/checkout@v1
 
